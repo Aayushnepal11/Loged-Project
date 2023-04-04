@@ -1,0 +1,33 @@
+{% extends 'learning_logs/base.html' %}
+{% block page_header %}
+    <div class="border-bottom">
+        <h3 class="display-3">{{ topic }} </h3>
+    </div>
+{% endblock page_header %}
+{% block content %}
+    <div class="display-6">Entries:</div>
+    <div class="d-flex mb-3 justify-content-center">
+        <a href="{% url 'learning_logs:new_entry' topic.id %}" class="btn btn-outline-dark">Add a new entry</a>
+    </div>
+    <div class="row">
+        {% for entry in entries %}
+            <div class="card m-2
+            {% if entry.id|divisibleby:2 == 0 %}
+                bg-primary
+                text-white
+            {% else %}
+                bg-danger
+                text-white
+            {% endif %}
+            ">
+                <h5 class="card-header">{{ entry.date_added | date:'M d, Y H:i'  }} <span class="badge text-bg-dark"><a class="text-white" href="{% url 'learning_logs:edit_entry' entry.id %}">Edit Entry</a></span></h5>
+                <div class="card-body">
+                    <p class="card-text">{{ entry.text |linebreaks }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <div class="alert alert-info"> No Entries are found for this {{ topic }}!</div>
+        {% endfor %}
+        </div>
+    
+{% endblock content %}

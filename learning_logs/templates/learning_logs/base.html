@@ -1,0 +1,31 @@
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% if title %} {{ title }} {% else %} Learning_Logs/Home {% endif %}
+    </title>
+    {% bootstrap_css %}
+  </head>
+  <body>
+    {% block navbar %}
+      {% include './includes/nav.html' %}
+    {% endblock navbar %}
+    <main role="main" class="container" style="padding-top:50px;">
+      <div class="{% if not user.is_authenticated %} pb-2 mb-2 border-bottom {% else %} pb-2 mb-2 {% endif %}">
+        {% block page_header %} {% endblock page_header%}
+      </div>
+      <div>
+        {% block content %}
+      
+        {% endblock content %}  
+      </div>
+    </main>
+    
+    {% bootstrap_javascript %}
+
+  </body>
+</html>

@@ -1,0 +1,33 @@
+{% extends 'learning_logs/base.html' %}
+{% block content %}
+    <p class="display-3">Topics</p>
+    <div class="row">
+    {% for topic in topics %}
+    <div class="card m-2 
+        {% if topic.id|divisibleby:2 == 0 %}
+            bg-primary
+            text-white
+        {% else %}
+            bg-danger
+            text-white
+        {% endif %}
+     " 
+    style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{ topic }}</h5>
+          <a href="{% url 'learning_logs:topic' topic.id %}" 
+          class="btn {% if topic.id|divisibleby:2 == 0 %}
+            btn-primary text-white
+          {% else %}
+            btn-danger text-white
+          {% endif %}">{{ topic }}</a>
+        </div>
+      </div>
+        {% empty %}
+        <div class="alert alert-info">No topics have been added yet.</li>
+    {% endfor %}
+    </div>
+    <div clas="row">
+        <a href="{% url 'learning_logs:new_topic' %}" class="btn btn-outline-dark">Add a new topic</a>
+    </div>
+{% endblock content %}
