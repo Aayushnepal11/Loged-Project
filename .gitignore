@@ -6,3 +6,4 @@ lib
 lib64
 ll_env
 __pycache__/
+.env
